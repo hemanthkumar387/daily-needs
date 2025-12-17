@@ -1,13 +1,17 @@
 import jwt from "jsonwebtoken";
 
 export const protect = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
+  const token = req.cookies?.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
   try {
-    req.user = jwt.verify(token, "supersecretkey");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
     next();
-  } catch {
-    res.status(401).json({ message: "Invalid token" });
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
