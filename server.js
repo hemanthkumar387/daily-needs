@@ -31,9 +31,6 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("Mongo error:", err));
 
-
-app.options("*", cors());
-
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 app.use("/api/groceries", groceryRoutes);
