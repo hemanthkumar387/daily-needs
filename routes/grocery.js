@@ -31,14 +31,26 @@ router.post("/", protect, async (req, res) => {
 });
 
 /* ================= UPDATE GROCERY (SAFE) ================= */
+/* ================= UPDATE GROCERY (SAFE + SOFT DELETE) ================= */
 router.put("/:id", protect, async (req, res) => {
   try {
-    const { quantity, bought, boughtAt } = req.body;
+    const {
+      quantity,
+      bought,
+      boughtAt,
+      archived,
+      archivedAt,
+    } = req.body;
 
     const updateData = {};
+
     if (quantity !== undefined) updateData.quantity = quantity;
     if (bought !== undefined) updateData.bought = bought;
     if (boughtAt !== undefined) updateData.boughtAt = boughtAt;
+
+    // ✅ ADD THESE TWO LINES
+    if (archived !== undefined) updateData.archived = archived;
+    if (archivedAt !== undefined) updateData.archivedAt = archivedAt;
 
     const updatedItem = await GroceryItem.findOneAndUpdate(
       { _id: req.params.id, userId: req.user.id },
@@ -56,6 +68,7 @@ router.put("/:id", protect, async (req, res) => {
     res.status(500).json({ message: "Failed to update item" });
   }
 });
+
 
 /* ================= DELETE GROCERY ================= */
 router.delete("/:id", protect, async (req, res) => {
