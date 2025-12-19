@@ -16,6 +16,11 @@ const groceryItemSchema = new mongoose.Schema(
       type: Boolean,
       default: false, // 🔥 NEW
     },
+
+    boughtAt: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );
