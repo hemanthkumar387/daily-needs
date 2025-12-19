@@ -21,6 +21,12 @@ const groceryItemSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+
+    archived: {
+    type: Boolean,
+    default: false,
+  },
+  
   },
   { timestamps: true }
 );
