@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://daily-needs-six.vercel.app",
+    origin: "https://dailywants.co.in",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
