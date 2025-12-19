@@ -26,7 +26,8 @@ const groceryItemSchema = new mongoose.Schema(
     type: Boolean,
     default: false,
   },
-  
+  archivedAt: { type: Date },
+
   },
   { timestamps: true }
 );
