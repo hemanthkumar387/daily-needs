@@ -11,7 +11,6 @@ router.get("/", protect, async (req, res) => {
     const items = await GroceryItem.find({ userId: req.user.id });
     res.json(items);
   } catch (err) {
-    console.error("Get groceries error:", err);
     res.status(500).json({ message: "Failed to fetch groceries" });
   }
 });
@@ -25,7 +24,6 @@ router.post("/", protect, async (req, res) => {
     });
     res.status(201).json(item);
   } catch (err) {
-    console.error("Add grocery error:", err);
     res.status(500).json({ message: "Failed to add item" });
   }
 });
@@ -64,7 +62,6 @@ router.put("/:id", protect, async (req, res) => {
 
     res.json(updatedItem);
   } catch (err) {
-    console.error("Update grocery error:", err);
     res.status(500).json({ message: "Failed to update item" });
   }
 });
@@ -79,7 +76,6 @@ router.delete("/:id", protect, async (req, res) => {
     });
     res.json({ message: "Deleted" });
   } catch (err) {
-    console.error("Delete grocery error:", err);
     res.status(500).json({ message: "Failed to delete item" });
   }
 });
